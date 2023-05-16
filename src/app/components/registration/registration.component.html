@@ -22,64 +22,64 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form>
+            <form [formGroup]="registrationForm">
               <!-- UserId input -->
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example10" class="form-control" />
-                <label class="form-label" for="form3Example10">UserId</label>
+                <input type="text" id="loginId" class="form-control" formControlName="loginId" />
+                <label class="form-label" for="loginId">UserId</label>
               </div>
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
-                    <label class="form-label" for="form3Example1">First name</label>
+                    <input type="text" id="firstName" class="form-control" formControlName="firstName" />
+                    <label class="form-label" for="firstName">First name</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example2" class="form-control" />
-                    <label class="form-label" for="form3Example2">Last name</label>
+                    <input type="text" id="lastName" class="form-control" formControlName="lastName" />
+                    <label class="form-label" for="lastName">Last name</label>
                   </div>
                 </div>
               </div>
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email address</label>
+                <input type="email" id="email" class="form-control" formControlName="email" />
+                <label class="form-label" for="email">Email address</label>
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
+                <input type="password" id="password" class="form-control" formControlName="password" />
+                <label class="form-label" for="password">Password</label>
               </div>
               <!-- Confirm Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Confirm Password</label>
+                <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"/>
+                <label class="form-label" for="confirmPassword">Confirm Password</label>
               </div>
 
                <!-- Contact Number input -->
                <div class="form-outline mb-4">
-                <input type="number" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Contact Number</label>
+                <input type="number" id="contactNumber" class="form-control" formControlName="contactNumber" />
+                <label class="form-label" for="contactNumber">Contact Number</label>
               </div>
                <!-- Roles input -->
                <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Roles</label>
+                <input type="text" id="roles" class="form-control" formControlName="roles" />
+                <label class="form-label" for="roles">Roles</label>
               </div>
                <!-- Secret Question input -->
                <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Secret Question</label>
+                <input type="text" id="secretQuestion" class="form-control" formControlName="secretQuestion" />
+                <label class="form-label" for="secretQuestion">Secret Question</label>
               </div>
               <!-- Secret Answer input -->
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Secret Answer</label>
+                <input type="text" id="answer" class="form-control" formControlName="answer" />
+                <label class="form-label" for="answer">Secret Answer</label>
               </div>
 
               <!-- Checkbox -->
@@ -91,7 +91,7 @@
               </div> -->
 
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4" routerLink="/login">
+              <button type="submit" class="btn btn-primary btn-block mb-4" routerLink="/login" (click)="getRegistrationFormData()">
                 Sign up
               </button>
               

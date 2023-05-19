@@ -8,6 +8,19 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MovieComponent } from './components/movie/movie.component';
+import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { TicketBookingComponent } from './components/ticket-booking/ticket-booking.component';
+
 
 @NgModule({
   declarations: [
@@ -15,12 +28,25 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegistrationComponent,
     ForgetPasswordComponent,
-    HomeComponent
+    HomeComponent,
+    MovieComponent,
+    TicketComponent,
+    TicketBookingComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

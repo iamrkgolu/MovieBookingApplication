@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { User } from 'src/app/model/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,6 +9,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+
+  user:User|any;
 
   registrationForm=new FormGroup({
     loginId:new FormControl(''),
@@ -25,9 +29,14 @@ export class RegistrationComponent implements OnInit {
     console.log(this.registrationForm.value)
   }
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
+  }
+  registerUser(){
+    this.userService.registerUser(this.registrationForm.value).subscribe(data=>{
+      console.log(data)
+    })
   }
 
 }

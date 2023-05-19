@@ -1,0 +1,55 @@
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+          The best offer <br />
+          <span style="color: hsl(218, 81%, 75%)">for your business</span>
+        </h1>
+        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Temporibus, expedita iusto veniam atque, magni tempora mollitia
+          dolorum consequatur nulla, neque debitis eos reprehenderit quasi
+          ab ipsum nisi dolorem modi. Quos?
+        </p>
+      </div>
+
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+        <div class="card bg-glass">
+          <div class="card-body px-4 py-5 px-md-5">
+            <form [formGroup]="createMovieForm">
+              <!-- MovieId input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="movieId" class="form-control" formControlName="movieId" />
+                <label class="form-label" for="movieId">MovieId</label>
+              </div>
+
+              <!-- Movie Name input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="movieName" class="form-control" formControlName="movieName" />
+                <label class="form-label" for="movieName">Movie Name</label>
+              </div>
+
+              <!-- Total Seat input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="totalSeat" class="form-control" formControlName="totalSeat" />
+                <label class="form-label" for="totalSeat">Total Seat</label>
+              </div>
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4" (click)="addMovie()">
+                Add Movie
+              </button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->

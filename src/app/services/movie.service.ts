@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Movie } from '../model/movie';
 import { Observable } from 'rxjs';
@@ -13,13 +13,26 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   createMovie(movie: Movie | any): Observable<Movie> {
-    return this.http.post<Movie>(this.url+'admin/addmovie', movie);
+    let headers=new HttpHeaders({
+      'Authorization':`Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<Movie>(this.url+'admin/addmovie', movie,{headers});
   }
   getAllMovie(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.url+'all')
+    let headers=new HttpHeaders({
+      'Authorization':`Bearer ${localStorage.getItem('token')}`
+
+    });
+  
+    
+    return this.http.get<Movie[]>(this.url+'all',{headers})
   }
-  deleteMovie(id: number): Observable<Movie> {
-    return this.http.delete<Movie>(`${this.url}admin/delete/${id}`);
+  deleteMovie(id: any): Observable<any> {
+    let headers=new HttpHeaders({
+      'Authorization':`Bearer ${localStorage.getItem('token')}`
+
+    });
+    return this.http.delete<any>(`${this.url}admin/delete/${id}`,{headers});
   }
   updateMovie(movie: any, id: number): Observable<Movie> {
     return this.http.put<Movie>(`${this.url}/${id}`, movie);

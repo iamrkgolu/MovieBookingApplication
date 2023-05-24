@@ -11,26 +11,34 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
+  
+
+  rolesList: string[] = ['','Admin', 'Customer'];
+
   loginForm=new FormGroup({
     loginId:new FormControl(''),
     password:new FormControl(''),
-    roles:new FormControl<string|any>('')
+    roles : new FormControl<string|any>('')
   })
-  msg:any;
   constructor(private userService:UserService,private router:Router,private routerGuard:RouterGuardService) { }
 
   public getLoginData(){
         localStorage.setItem('roles',this.loginForm.value.roles)
-    // this.userService.loginUser(this.loginForm.value).subscribe(data=>{
+        if(this.loginForm.value.roles===''){
+          alert("Please select role")
+          this.router.navigate(['/login'])
 
-    //   console.log(data.Token)
-    //   localStorage.setItem('token',data.Token)
-    //   localStorage.setItem('roles',this.loginForm.value.roles);
-    //   this.router.navigate(['/home'])
+        }else{
+          this.userService.loginUser(this.loginForm.value).subscribe(res=>{
+            localStorage.setItem('token',res.Token)
+            console.log(res.Token)
+            this.router.navigate(['/home'])
+           
+          })
+          
+        }
 
-    // })
-    // console.log(this.loginForm.value)
-    this.router.navigate(['/home'])
+         
 
 
   }

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -13,7 +13,12 @@ export class TicketService {
   constructor(private http:HttpClient) { }
 
   getAllTicket():Observable<any>{
-  return this.http.get<any>(this.base_Url+'ticket/all')
+    let headers=new HttpHeaders({
+      'Authorization':`Bearer ${localStorage.getItem('token')}`
+
+    });
+    
+  return this.http.get<any>(this.base_Url+'ticket/all',{headers})
   }
   bookTicket(data:any,movieName:any):Observable<any>{
     return this.http.post<any>(`${this.base_Url}${movieName}/book`,data)

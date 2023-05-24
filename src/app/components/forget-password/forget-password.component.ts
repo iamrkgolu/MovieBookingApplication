@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forget-password',
@@ -15,11 +16,20 @@ export class ForgetPasswordComponent implements OnInit {
     answer:new FormControl('')
   });
 
+
   getForgetPasswordFormData(){
-    console.log(this.forgetPasswordForm.value);
+    if(this.forgetPasswordForm.value.password!==this.forgetPasswordForm.value.confirmPassword){
+      alert("Please Type password & confirm password same")
+      this.router.navigate(['/forget'])
+    }else{
+      alert('Password reset successful')
+      console.log(this.forgetPasswordForm.value);
+      this.router.navigate(['/login'])
+    }
+   
   }
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }

@@ -20,6 +20,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { TicketBookingComponent } from './components/ticket-booking/ticket-booking.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule} from '@angular/material/input'
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { TicketBookingComponent } from './components/ticket-booking/ticket-booki
     MatIconModule,
     MatButtonModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,8 @@ import { MovieService } from 'src/app/services/movie.service';
 import { UserService } from 'src/app/services/user.service';
 import { Movie } from 'src/app/model/movie';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MovieComponent } from '../movie/movie.component';
 
 let ELEMENT_DATA: Movie[] = [
 ];
@@ -21,10 +23,10 @@ export class HomeComponent implements OnInit {
   dataSource: any = new MatTableDataSource(this.movies);
 
 
-  constructor(private movieService: MovieService, private userService: UserService,private router:Router) { }
+  constructor(private movieService: MovieService, private userService: UserService,private router:Router,public dialog: MatDialog) { }
+  
   ngOnInit(): void {
     this.getAllMovie()
-
 
   }
 
@@ -41,6 +43,7 @@ export class HomeComponent implements OnInit {
   getData(event: any) {
     this.movieService.deleteMovie(event).subscribe(data => {
       window.alert('Movie Deleted with id ' + event)
+      location.reload()
     },
       error => {
         console.log(error);
@@ -54,6 +57,21 @@ export class HomeComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  logout(){
+    localStorage.removeItem('isLogined')
+    localStorage.removeItem('token')
+    localStorage.removeItem('roles')
+    localStorage.removeItem('movieName')
+    localStorage.removeItem('error')
+    this.router.navigate(['/login'])
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(MovieComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

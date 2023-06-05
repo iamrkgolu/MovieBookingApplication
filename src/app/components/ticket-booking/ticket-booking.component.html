@@ -1,55 +1,79 @@
-<h1>Booking App</h1>
-{{movieName}}
-<section class="background-radial-gradient overflow-hidden">
+<p>
+  <mat-toolbar color="primary">
 
-  <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-          The best offer <br />
-          <span style="color: hsl(218, 81%, 75%)">for your business</span>
-        </h1>
-        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Temporibus, expedita iusto veniam atque, magni tempora mollitia
-          dolorum consequatur nulla, neque debitis eos reprehenderit quasi
-          ab ipsum nisi dolorem modi. Quos?
-        </p>
+    <span>MovieBookingApplication</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="primary" class="example-button-row" aria-label="Example icon-button with share icon" routerLink="/home">
+      Back
+    </button>
+  </mat-toolbar>
+</p>
+
+
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Movie Name</ng-template>
+      <mat-form-field>
+        <mat-label>Movie Name</mat-label>
+        <input matInput placeholder="Movie" formControlName="movieName" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
       </div>
-
-      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-
-        <div class="card bg-glass">
-          <div class="card-body px-4 py-5 px-md-5">
-            <form [formGroup]="bookingForm">
-              <!-- TheaterName input -->
-              <div class="form-outline mb-4">
-                <input type="text" id="theaterName" class="form-control" formControlName="theaterName" />
-                <label class="form-label" for="theaterName">Theater Name</label>
-              </div>
-
-              <!-- Seat Booked input -->
-              <div class="form-outline mb-4">
-                <input type="number" id="seatBooked" class="form-control" formControlName="seatBooked" />
-                <label class="form-label" for="seatBooked">Seat Booked</label>
-              </div>
-
-              <!-- Address input -->
-              <div class="form-outline mb-4">
-                <input type="text" id="address" class="form-control" formControlName="address" />
-                <label class="form-label" for="address">Address</label>
-              </div>
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4" (click)="bookTicket()">
-                Book Ticket
-              </button>
-
-            </form>
-          </div>
-        </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Theater Name">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field>
+        <mat-label>Theater Name</mat-label>
+        <input matInput formControlName="theaterName" placeholder="Theater Name"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
       </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" label="Seat Booked">
+    <form [formGroup]="thirdFormGroup">
+      <mat-form-field>
+        <mat-label>Seat Booked</mat-label>
+        <input type="number" matInput formControlName="seatBooked" placeholder="No Of Seat Book"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="fourthFormGroup" label="address">
+    <form [formGroup]="fourthFormGroup">
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" placeholder="Ex. 1 Main St, New York, NY"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  
+  <mat-step>
+    <ng-template matStepLabel >Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="bookTicket()">Book</button>
     </div>
-  </div>
-</section>
+  </mat-step>
+</mat-stepper>

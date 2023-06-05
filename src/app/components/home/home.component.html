@@ -6,17 +6,17 @@
     </button>
     <span>MovieBookingApplication</span>
     <span class="example-spacer"></span>
-    <button mat-raised-button color="primary" class="example-button-row" aria-label="Example icon-button with share icon" routerLink="/createMovie" *ngIf="role=='Admin'">
+    <button mat-raised-button color="primary" class="example-button-row" aria-label="Example icon-button with share icon" mat-button (click)="openDialog()" *ngIf="role=='Admin'">
       Add Movie
     </button>
-    <button mat-raised-button color="primary" class="example-button-row" aria-label="Example icon-button with share icon" routerLink="/ticket">
+    <button mat-raised-button color="primary" class="example-button-row" aria-label="Example icon-button with share icon" routerLink="/ticket" *ngIf="role=='Admin'">
       Show Booking
     </button>
-    <button mat-raised-button color="primary" class="example-button-row" aria-label="Example icon-button with share icon" routerLink="/login">
+    <button mat-raised-button color="primary" class="example-button-row" aria-label="Example icon-button with share icon" (click)="logout()">
       LogOut
     </button>
   </mat-toolbar>
-</p>
+</p> 
 <!-- Coontent Section -->
 <mat-form-field>
   <mat-label>Filter</mat-label>

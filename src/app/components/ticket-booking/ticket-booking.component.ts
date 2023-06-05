@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TicketService } from 'src/app/services/ticket.service';
+
+
+
 
 @Component({
   selector: 'app-ticket-booking',
@@ -10,22 +13,36 @@ import { TicketService } from 'src/app/services/ticket.service';
 })
 export class TicketBookingComponent implements OnInit {
   movieName:any=localStorage.getItem('movieName');
-  constructor(private ticketService:TicketService,private router:Router) { }
+  constructor(private ticketService:TicketService,private router:Router,private _formBuilder: FormBuilder ) { }
 
-  bookingForm=new FormGroup({
-    theaterName:new FormControl(''),
-    seatBooked:new FormControl(''),
-    address:new FormControl('')
-  })
-
+  firstFormGroup = this._formBuilder.group({
+    movieName: [this.movieName, Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    theaterName: ['', Validators.required],
+  });
+  thirdFormGroup = this._formBuilder.group({
+    seatBooked: ['', Validators.required],
+  });
+  fourthFormGroup = this._formBuilder.group({
+    address: ['', Validators.required],
+  });
+  isLinear = false;
   ngOnInit(): void {
   }
 
   bookTicket(){
-    this.ticketService.bookTicket(this.bookingForm.value,this.movieName).subscribe(res=>{
+   let booking={
+      theaterName:this.secondFormGroup.value.theaterName,
+      seatBooked:this.thirdFormGroup.value.seatBooked,
+      address:this.fourthFormGroup.value.address
+    }
+     this.ticketService.bookTicket(booking,this.movieName).subscribe(res=>{
       window.alert("Booking Confirm !!! \n"+this.movieName)
       this.router.navigate(['/home'])
     })
+ 
+    console.log(booking)
+   
   }
-
 }

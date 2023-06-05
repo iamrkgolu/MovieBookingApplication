@@ -27,6 +27,8 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
   addMovie(){
     this.movie.movieId=this.createMovieForm.value.movieId
     this.movie.movieName=this.createMovieForm.value.movieName
@@ -34,9 +36,12 @@ export class MovieComponent implements OnInit {
     this.movieService.createMovie(this.movie).subscribe(data=>{
       console.log(data)
       this.router.navigate(['/home'])
+      location.reload()
     },
     error=>{
       console.log(error);
     })
   }
+
+
 }

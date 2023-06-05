@@ -7,7 +7,9 @@ import { Injectable } from '@angular/core';
 })
 export class TicketService {
 
-  base_Url='http://localhost:8081/api/v1.0/moviebooking/'
+  base_Url='http://52.32.134.149:8081/api/v1.0/moviebooking/'
+  getAllTicket_url='https://oeu3mwsy36.execute-api.us-west-2.amazonaws.com/myGateway/ticket'
+  bookTicket_url=' https://oeu3mwsy36.execute-api.us-west-2.amazonaws.com/myGateway/'
 
 
   constructor(private http:HttpClient) { }
@@ -18,9 +20,9 @@ export class TicketService {
 
     });
     
-  return this.http.get<any>(this.base_Url+'ticket/all',{headers})
+  return this.http.get<any>(this.getAllTicket_url,{headers})
   }
   bookTicket(data:any,movieName:any):Observable<any>{
-    return this.http.post<any>(`${this.base_Url}${movieName}/book`,data)
+    return this.http.post<any>(`${this.bookTicket_url}${movieName}`,data)
     }
 }

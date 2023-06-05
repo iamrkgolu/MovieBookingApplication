@@ -7,29 +7,29 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  url_register='http://localhost:8082/auth/v1/addUser'
-  url_login='http://localhost:8081/auth/v1.0/login'
 
-  constructor(private http:HttpClient) { }
+  url_register = 'https://oeu3mwsy36.execute-api.us-west-2.amazonaws.com/myGateway/authorization/register'
+  url_login = 'https://oeu3mwsy36.execute-api.us-west-2.amazonaws.com/myGateway/authorization'
+  url_forget = 'https://oeu3mwsy36.execute-api.us-west-2.amazonaws.com/myGateway/'
+
+  constructor(private http: HttpClient) { }
 
   registerUser(user: User | any): Observable<User> {
     return this.http.post<User>(this.url_register, user);
   }
 
-  loginUser(userDetails:any):Observable<any>{
-    
-    let headers=new HttpHeaders().set("Access-Control-Allow-Origin", "*")
-    return this.http.post<loginResponse>(this.url_login,userDetails);
+  loginUser(userDetails: any): Observable<any> {
+
+    let headers = new HttpHeaders().set("Access-Control-Allow-Origin", "*")
+    return this.http.post<loginResponse>(this.url_login, userDetails);
   }
-  getAllUser():Observable<User[]>{
-    let headers=new HttpHeaders().set("Authorization",`Bearer ${localStorage.getItem('token')}`)
-    .set("Access-Control-Allow-Origin","*")
-    return this.http.get<User[]>('http://localhost:8082/api/v1.0/moviebooking/getAllUsers',{headers});
+  forgetPassword(userId: any, user: any): Observable<any> {
+    return this.http.put<any>(`${this.url_forget}${userId}`, user);
   }
 
-  
+
 }
-interface loginResponse{
-    Message:any
-    Token:any
+interface loginResponse {
+  Message: any
+  Token: any
 }

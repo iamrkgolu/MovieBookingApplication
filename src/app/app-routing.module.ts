@@ -14,10 +14,10 @@ const routes: Routes = [
   {path:'register',component:RegistrationComponent},
   {path:'login',component:LoginComponent},
   {path:'forget',component:ForgetPasswordComponent},
-  {path:'home',component:HomeComponent},
-  {path:'createMovie',component:MovieComponent},
-  {path:'ticket',component:TicketComponent},
-  {path:'booking',component:TicketBookingComponent}
+  {path:'home',component:HomeComponent,canActivate:[RouterGuardService]},
+  {path:'createMovie',component:MovieComponent,canActivate:[RouterGuardService]},
+  {path:'ticket',component:TicketComponent,canActivate:[RouterGuardService]},
+  {path:'booking',component:TicketBookingComponent,canActivate:[RouterGuardService]}
 ];
 
 @NgModule({

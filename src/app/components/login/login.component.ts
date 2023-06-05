@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { RouterGuardService } from 'src/app/services/router-guard.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,14 +10,16 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  isLogined:boolean|any=false
+  loginStatus=''
+  error=localStorage.getItem('error')
   
 
   rolesList: string[] = ['','Admin', 'Customer'];
 
   loginForm=new FormGroup({
-    loginId:new FormControl(''),
-    password:new FormControl(''),
+    loginId:new FormControl('',Validators.required),
+    password:new FormControl('',Validators.required),
     roles : new FormControl<string|any>('')
   })
   constructor(private userService:UserService,private router:Router,private routerGuard:RouterGuardService) { }
@@ -31,17 +33,26 @@ export class LoginComponent implements OnInit {
         }else{
           this.userService.loginUser(this.loginForm.value).subscribe(res=>{
             localStorage.setItem('token',res.Token)
-            console.log(res.Token)
+             this.isLogined=true
+             localStorage.setItem('isLogined',this.isLogined)
+             localStorage.removeItem('error')
+             console.log(res)
             this.router.navigate(['/home'])
-           
+            
+          },error=>{
+            localStorage.setItem('error',error.error)
+            this.loginStatus=error.error
           })
-          
         }
 
-         
+        
 
 
   }
+  reloadPage(){
+      location.reload()    
+  }
+   
 
 
 

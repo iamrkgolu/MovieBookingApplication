@@ -21,7 +21,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { TicketBookingComponent } from './components/ticket-booking/ticket-booking.component';
 import {MatSelectModule} from '@angular/material/select';
-import { MatInputModule} from '@angular/material/input'
+import {MatInputModule} from '@angular/material/input';
+
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 
 @NgModule({
@@ -50,7 +53,9 @@ import { MatInputModule} from '@angular/material/input'
     MatTableModule,
     MatDialogModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatStepperModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

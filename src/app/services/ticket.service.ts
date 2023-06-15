@@ -11,6 +11,8 @@ export class TicketService {
   getAllTicket_url='https://oeu3mwsy36.execute-api.us-west-2.amazonaws.com/myGateway/ticket'
   bookTicket_url=' https://oeu3mwsy36.execute-api.us-west-2.amazonaws.com/myGateway/'
 
+  getAllTicketLocal_url='http://localhost:8081/api/v1.0/moviebooking/ticket/all'
+  bookTicketLocal_url='http://localhost:8081/api/v1.0/moviebooking/'
 
   constructor(private http:HttpClient) { }
 
@@ -19,10 +21,10 @@ export class TicketService {
       'Authorization':`Bearer ${localStorage.getItem('token')}`
 
     });
-    
-  return this.http.get<any>(this.getAllTicket_url,{headers})
+
+  return this.http.get<any>(this.getAllTicketLocal_url,{headers})
   }
   bookTicket(data:any,movieName:any):Observable<any>{
-    return this.http.post<any>(`${this.bookTicket_url}${movieName}`,data)
+    return this.http.post<any>(`${this.bookTicketLocal_url}${movieName}/book`,data)
     }
 }

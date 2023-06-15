@@ -7,9 +7,7 @@ import { Movie } from 'src/app/model/movie';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieComponent } from '../movie/movie.component';
-
-let ELEMENT_DATA: Movie[] = [
-];
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +22,19 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private movieService: MovieService, private userService: UserService,private router:Router,public dialog: MatDialog) { }
-  
+
+  movieId=new FormGroup({
+    id:new FormControl<any>('')
+  })
+
+  getMovieId(){
+    console.log(this.movieId.value.id)
+    localStorage.setItem('movieId',this.movieId.value.id)
+    this.router.navigate(['/search/movie'])
+
+  }
+
+
   ngOnInit(): void {
     this.getAllMovie()
 
@@ -35,7 +45,7 @@ export class HomeComponent implements OnInit {
       this.movies = data
       this.dataSource = this.movies
       console.log(this.movies)
-      
+
     }, error => {
       console.log(error)
     })
@@ -52,11 +62,6 @@ export class HomeComponent implements OnInit {
   getMovieName(event: any) {
     localStorage.setItem('movieName', event)
     console.log(event)
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   logout(){
     localStorage.removeItem('isLogined')

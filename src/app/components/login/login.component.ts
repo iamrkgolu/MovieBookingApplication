@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   isLogined:boolean|any=false
   loginStatus=''
   error=localStorage.getItem('error')
-  
+
 
   rolesList: string[] = ['','Admin', 'Customer'];
 
@@ -38,21 +38,22 @@ export class LoginComponent implements OnInit {
              localStorage.removeItem('error')
              console.log(res)
             this.router.navigate(['/home'])
-            
+
           },error=>{
             localStorage.setItem('error',error.error)
             this.loginStatus=error.error
+            this.reloadPage()
           })
         }
 
-        
+
 
 
   }
   reloadPage(){
-      location.reload()    
+      location.reload()
   }
-   
+
 
 
 

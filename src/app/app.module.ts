@@ -24,6 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 
 import {MatStepperModule} from '@angular/material/stepper';
+import { SearchMovieComponent } from './components/search-movie/search-movie.component';
 
 
 
@@ -36,7 +37,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     HomeComponent,
     MovieComponent,
     TicketComponent,
-    TicketBookingComponent
+    TicketBookingComponent,
+    SearchMovieComponent
 
   ],
   imports: [

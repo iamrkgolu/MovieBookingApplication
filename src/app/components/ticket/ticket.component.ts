@@ -13,6 +13,10 @@ export class TicketComponent implements OnInit {
   constructor(private ticketService:TicketService) { }
 
   ngOnInit(): void {
+    this.getAllTicket()
+  }
+
+  getAllTicket(){
     this.ticketService.getAllTicket().subscribe(res=>{
       this.dataSource=res
     })

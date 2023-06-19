@@ -25,6 +25,7 @@ import {MatInputModule} from '@angular/material/input';
 
 import {MatStepperModule} from '@angular/material/stepper';
 import { SearchMovieComponent } from './components/search-movie/search-movie.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -57,7 +58,8 @@ import { SearchMovieComponent } from './components/search-movie/search-movie.com
     MatSelectModule,
     MatInputModule,
     MatStepperModule,
-   
+    MatPaginatorModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MovieService } from 'src/app/services/movie.service';
@@ -8,20 +8,25 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieComponent } from '../movie/movie.component';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  
   role: string | any = localStorage.getItem('roles')
-  movies: Movie[] | any[] = [];
   displayedColumns: string[] = ['movieId', 'movieName', 'totalSeat', 'totalSeatBooked', 'availableSeatsForBooking', 'action'];
-  dataSource: any = new MatTableDataSource(this.movies);
+  dataSource: any = new MatTableDataSource<Movie>(ELEMENT_DATA);
 
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
-  constructor(private movieService: MovieService, private userService: UserService,private router:Router,public dialog: MatDialog) { }
+  constructor(private movieService: MovieService, private userService: UserService,private router:Router,public dialog: MatDialog) {
+
+   }
 
   movieId=new FormGroup({
     id:new FormControl<any>('')
@@ -33,19 +38,20 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/search/movie'])
 
   }
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.getAllMovie()
-
   }
 
   getAllMovie() {
     this.movieService.getAllMovie().subscribe(data => {
-      this.movies = data
-      this.dataSource = this.movies
-      console.log(this.movies)
-
+      data.forEach(e=>{
+        ELEMENT_DATA.push(e)
+      })
     }, error => {
       console.log(error)
     })
@@ -79,5 +85,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
 }
 
+let ELEMENT_DATA: Movie[] = [
+];

@@ -29,7 +29,7 @@
   </mat-toolbar>
 </p>
 <!-- Coontent Section -->
-
+<div class="mat-elevation-z8">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/Others/images/76.webp');">
 
   <!-- Position Column -->
@@ -71,6 +71,10 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
+<mat-paginator [pageSizeOptions]="[2, 5, 7]"
+showFirstLastButtons
+aria-label="Select page of periodic elements">
+</mat-paginator>
+</div>
 
 

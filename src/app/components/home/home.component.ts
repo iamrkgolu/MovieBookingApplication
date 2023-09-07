@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule, _MatTableDataSource } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MovieService } from 'src/app/services/movie.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,14 +15,15 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  
-  role: string | any = localStorage.getItem('roles')
-  displayedColumns: string[] = ['movieId', 'movieName', 'totalSeat', 'totalSeatBooked', 'availableSeatsForBooking', 'action'];
-  dataSource: any = new MatTableDataSource<Movie>(ELEMENT_DATA);
+export class HomeComponent implements OnInit{
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+  role: string | any = localStorage.getItem('roles')
+  movie:Movie[]|any[]=[]
+  displayedColumns: string[] = ['movieId', 'movieName', 'totalSeat', 'totalSeatBooked', 'availableSeatsForBooking', 'action'];
+  dataSource: any = new MatTableDataSource(this.movie);
+
+  // @ViewChild(MatPaginator)
+  // paginator!: MatPaginator;
 
   constructor(private movieService: MovieService, private userService: UserService,private router:Router,public dialog: MatDialog) {
 
@@ -38,20 +39,18 @@ export class HomeComponent {
     this.router.navigate(['/search/movie'])
 
   }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
+
     this.getAllMovie()
   }
 
   getAllMovie() {
     this.movieService.getAllMovie().subscribe(data => {
-      data.forEach(e=>{
-        ELEMENT_DATA.push(e)
-      })
+      this.movie=data
+      this.dataSource=data
+      console.log(data)
     }, error => {
       console.log(error)
     })
@@ -88,5 +87,4 @@ export class HomeComponent {
 
 }
 
-let ELEMENT_DATA: Movie[] = [
-];
+
